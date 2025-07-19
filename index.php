@@ -37,7 +37,7 @@
     <div class="modelo">
         <h2>Modelo E-R (Lo pueden eliminar o poner su modelo análogo)</h2>
         <p></p>
-        <img src="modelo_E-R.png">
+        <img src="Modelo Analogo.png">
     </div>
 
     <div class="enlaces">
