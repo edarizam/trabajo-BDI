@@ -1,23 +1,25 @@
-CREATE TABLE cliente(
-  cedula INT(10) PRIMARY KEY,
-  nombre VARCHAR(50) NOT NULL,
-  celular INT(10) NOT NULL
+CREATE TABLE isla(
+  codigo NUMERIC(10,0) PRIMARY KEY,
+  nombre VARCHAR(50) NOT NULL UNIQUE,
+  region VARCHAR(20) NOT NULL,
+  fruta_diablo NUMERIC(10,0) UNIQUE REFERENCES fruta_del_diablo
 );
 
-CREATE TABLE empresa(
-  nit INT(10) PRIMARY KEY,
-  nombre VARCHAR(50) NOT NULL,
-  presupuesto INT(10) NOT NULL,
-  cliente INT(10),
-  FOREIGN KEY(cliente) REFERENCES cliente
+CREATE TABLE enfrentamiento(
+  numero NUMERIC(10,0) PRIMARY KEY, 
+  nombre VARCHAR(100) NOT NULL UNIQUE,
+  fecha DATE NOT NULL,
+  numero_bajas NUMERIC(10,0) NOT NULL,
+  lugar_inicio NUMERIC(10,0) NOT NULL REFERENCES isla,
+  lugar_fin NUMERIC(10,0) REFERENCES isla
 );
 
-CREATE TABLE proyecto(
-  codigo INT(10) PRIMARY KEY,
-  fechacreacion DATE NOT NULL,
-  valor INT(10) NOT NULL,
-  cliente INT(10),
-  empresa INT(10),
-  FOREIGN KEY(cliente) REFERENCES cliente,
-  FOREIGN KEY(empresa) REFERENCES empresa
+CREATE TABLE fruta_del_diablo(
+  codigo NUMERIC(10,0) PRIMARY KEY,
+  nombre VARCHAR(50) NOT NULL UNIQUE,
+  tipo VARCHAR(20) NOT NULL,
+  poder_otorgado VARCHAR(100) NOT NULL UNIQUE,
+  precio NUMERIC(10,0) NOT NULL,
+  fecha_produccion DATE NOT NULL,
+  fecha_expiracion DATE NOT NULL,
 );
