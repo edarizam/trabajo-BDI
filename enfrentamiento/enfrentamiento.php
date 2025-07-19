@@ -3,12 +3,12 @@ include "../includes/header.php";
 ?>
 
 <!-- TÍTULO. Cambiarlo, pero dejar especificada la analogía -->
-<h1 class="mt-3">Entidad análoga a PROYECTO (NOMBRE)</h1>
+<h1 class="mt-3">Entidad análoga a REPARACION (ENFRENTAMIENTO)</h1>
 
 <!-- FORMULARIO. Cambiar los campos de acuerdo a su trabajo -->
 <div class="formulario p-4 m-3 border rounded-3">
 
-    <form action="proyecto_insert.php" method="post" class="form-group">
+    <form action="enfrentamiento_insert.php" method="post" class="form-group">
 
         <div class="mb-3">
             <label for="codigo" class="form-label">Código</label>
@@ -35,13 +35,13 @@ include "../includes/header.php";
 
                 <?php
                 // Importar el código del otro archivo
-                require("../cliente/cliente_select.php");
+                require("../isla/isla_select.php");
                 
                 // Verificar si llegan datos
-                if($resultadoCliente):
+                if($resultadoIsla):
                     
                     // Iterar sobre los registros que llegaron
-                    foreach ($resultadoCliente as $fila):
+                    foreach ($resultadoIsla as $fila):
                 ?>
 
                 <!-- Opción que se genera -->
@@ -93,10 +93,10 @@ include "../includes/header.php";
 
 <?php
 // Importar el código del otro archivo
-require("proyecto_select.php");
+require("enfrentamiento_select.php");
             
 // Verificar si llegan datos
-if($resultadoProyecto and $resultadoProyecto->num_rows > 0):
+if($resultadoEnfrentamiento and $resultadoEnfrentamiento->num_rows > 0):
 ?>
 
 <!-- MOSTRAR LA TABLA. Cambiar las cabeceras -->

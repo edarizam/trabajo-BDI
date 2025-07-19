@@ -3,12 +3,12 @@ include "../includes/header.php";
 ?>
 
 <!-- TÍTULO. Cambiarlo, pero dejar especificada la analogía -->
-<h1 class="mt-3">Entidad análoga a CLIENTE (NOMBRE)</h1>
+<h1 class="mt-3">Entidad análoga a CLIENTE (ISLA)</h1>
 
 <!-- FORMULARIO. Cambiar los campos de acuerdo a su trabajo -->
 <div class="formulario p-4 m-3 border rounded-3">
 
-    <form action="cliente_insert.php" method="post" class="form-group">
+    <form action="isla_insert.php" method="post" class="form-group">
 
         <div class="mb-3">
             <label for="cedula" class="form-label">Cédula</label>
@@ -33,10 +33,10 @@ include "../includes/header.php";
 
 <?php
 // Importar el código del otro archivo
-require("cliente_select.php");
+require("isla_select.php");
 
 // Verificar si llegan datos
-if($resultadoCliente and $resultadoCliente->num_rows > 0):
+if($resultadoIsla and $resultadoIsla->num_rows > 0):
 ?>
 
 <!-- MOSTRAR LA TABLA. Cambiar las cabeceras -->
@@ -58,7 +58,7 @@ if($resultadoCliente and $resultadoCliente->num_rows > 0):
 
             <?php
             // Iterar sobre los registros que llegaron
-            foreach ($resultadoCliente as $fila):
+            foreach ($resultadoIsla as $fila):
             ?>
 
             <!-- Fila que se generará -->
@@ -70,7 +70,7 @@ if($resultadoCliente and $resultadoCliente->num_rows > 0):
                 
                 <!-- Botón de eliminar. Debe de incluir la CP de la entidad para identificarla -->
                 <td class="text-center">
-                    <form action="cliente_delete.php" method="post">
+                    <form action="isla_delete.php" method="post">
                         <input hidden type="text" name="cedulaEliminar" value="<?= $fila["cedula"]; ?>">
                         <button type="submit" class="btn btn-danger">Eliminar</button>
                     </form>
