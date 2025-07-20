@@ -11,27 +11,42 @@ include "../includes/header.php";
     <form action="enfrentamiento_insert.php" method="post" class="form-group">
 
         <div class="mb-3">
-            <label for="codigo" class="form-label">Código</label>
-            <input type="number" class="form-control" id="codigo" name="codigo" required>
+            <label for="numero" class="form-label">Número</label>
+            <input type="number" class="form-control" id="numero_e" name="numero" required>
         </div>
 
         <div class="mb-3">
-            <label for="fechacreacion" class="form-label">Fecha de creación</label>
-            <input type="date" class="form-control" id="fechacreacion" name="fechacreacion" required>
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre_e" name="nombre" required>
         </div>
 
         <div class="mb-3">
-            <label for="valor" class="form-label">Valor</label>
-            <input type="number" class="form-control" id="valor" name="valor" required>
+            <label for="numero_bajas" class="form-label">Número de bajas</label>
+            <input type="number" class="form-control" id="numero_bajas_e" name="numero_bajas" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="fecha" class="form-label">Fecha</label>
+            <input type="date" class="form-control" id="fecha_e" name="fecha" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="lugar_inicio" class="form-label">Lugar de inicio</label>
+            <input type="number" class="form-control" id="lugar_inicio_e" name="lugar_inicio" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="lugar_fin" class="form-label">Lugar de fin</label>
+            <input type="number" class="form-control" id="lugar_fin_e" name="lugar_fin" required>
         </div>
         
-        <!-- Consultar la lista de clientes y desplegarlos -->
+        <!-- Consultar la lista de islas y desplegarlos -->
         <div class="mb-3">
-            <label for="cliente" class="form-label">Cliente</label>
-            <select name="cliente" id="cliente" class="form-select">
+            <label for="isla" class="form-label">Isla</label>
+            <select name="isla" id="isla" class="form-select">
                 
                 <!-- Option por defecto -->
-                <option value="" selected disabled hidden></option>
+                <option value= "" selected disabled hidden></option>
 
                 <?php
                 // Importar el código del otro archivo
@@ -55,7 +70,7 @@ include "../includes/header.php";
             </select>
         </div>
 
-        <!-- Consultar la lista de empresas y desplegarlos -->
+       <!-- Consultar la lista de empresas y desplegarlos -->
         <div class="mb-3">
             <label for="empresa" class="form-label">Empresa</label>
             <select name="empresa" id="empresa" class="form-select">
