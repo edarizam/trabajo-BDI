@@ -61,7 +61,7 @@ include "../includes/header.php";
 
                 <!-- Opción que se genera -->
                 <option value="<?= $fila["codigo"]; ?>">
-                    <?= $fila["codigo"]; ?> - <?= $fila["nombre"]; ?> - <?= $fila["region"];?> - <?= $fila["fruta_del_diablo"]; ?>
+                    <?= $fila["codigo"]; ?> - <?= $fila["nombre"]; ?> - <?= $fila["region"];?> - <?= $fila["fruta_diablo"]; ?>
                 </option>
 
                 <?php
