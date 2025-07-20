@@ -10,7 +10,7 @@ $region = $_POST["region"];
 $fruta_diablo = $_POST["fruta_diablo"];
 
 // Query SQL a la BD. Si tienen que hacer comprobaciones, hacerlas acá (Generar una query diferente para casos especiales)
-$query = "INSERT INTO `isla`(`codigo`,`nombre`, `region`, `fruta_diablo`) VALUES ('$codigo', '$nombre', '$region', '$fruta_diablo')";
+$query = "INSERT INTO `isla`(`codigo`,`nombre`, `region`, `fruta_diablo`) VALUES ('$codigo', '$nombre', '$region', '$fruta_diablo')";	
 
 // Ejecutar consulta
 $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
