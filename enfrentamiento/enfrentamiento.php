@@ -60,7 +60,9 @@ include "../includes/header.php";
                 ?>
 
                 <!-- Opción que se genera -->
-                <option value="<?= $fila["cedula"]; ?>"><?= $fila["nombre"]; ?> - C.C. <?= $fila["cedula"]; ?></option>
+                <option value="<?= $fila["codigo"]; ?>">
+                    <?= $fila["codigo"]; ?> - <?= $fila["nombre"]; ?> - <?= $fila["region"];?> - <?= $fila["fruta_del_diablo"]; ?>
+                </option>
 
                 <?php
                         // Cerrar los estructuras de control
@@ -70,35 +72,6 @@ include "../includes/header.php";
             </select>
         </div>
 
-       <!-- Consultar la lista de empresas y desplegarlos -->
-        <div class="mb-3">
-            <label for="empresa" class="form-label">Empresa</label>
-            <select name="empresa" id="empresa" class="form-select">
-                
-                <!-- Option por defecto -->
-                <option value="" selected disabled hidden></option>
-
-                <?php
-                // Importar el código del otro archivo
-                require("../empresa/empresa_select.php");
-                
-                // Verificar si llegan datos
-                if($resultadoEmpresa):
-                    
-                    // Iterar sobre los registros que llegaron
-                    foreach ($resultadoEmpresa as $fila):
-                ?>
-
-                <!-- Opción que se genera -->
-                <option value="<?= $fila["nit"]; ?>"><?= $fila["nombre"]; ?> - NIT: <?= $fila["nit"]; ?></option>
-
-                <?php
-                        // Cerrar los estructuras de control
-                    endforeach;
-                endif;
-                ?>
-            </select>
-        </div>
 
         <button type="submit" class="btn btn-primary">Agregar</button>
 
@@ -122,12 +95,12 @@ if($resultadoEnfrentamiento and $resultadoEnfrentamiento->num_rows > 0):
         <!-- Títulos de la tabla, cambiarlos -->
         <thead class="table-dark">
             <tr>
-                <th scope="col" class="text-center">Código</th>
-                <th scope="col" class="text-center">Fecha de creación</th>
-                <th scope="col" class="text-center">Valor</th>
-                <th scope="col" class="text-center">Cliente</th>
-                <th scope="col" class="text-center">Empresa</th>
-                <th scope="col" class="text-center">Acciones</th>
+                <th scope="col" class="text-center">Número</th>
+                <th scope="col" class="text-center">Nombre</th>
+                <th scope="col" class="text-center">Número de bajas</th>
+                <th scope="col" class="text-center">Fecha</th>
+                <th scope="col" class="text-center">Lugar de inicio</th>
+                <th scope="col" class="text-center">Lugar de fin</th>
             </tr>
         </thead>
 
@@ -135,22 +108,23 @@ if($resultadoEnfrentamiento and $resultadoEnfrentamiento->num_rows > 0):
 
             <?php
             // Iterar sobre los registros que llegaron
-            foreach ($resultadoProyecto as $fila):
+            foreach ($resultadoEnfrentamiento as $fila):
             ?>
 
             <!-- Fila que se generará -->
             <tr>
                 <!-- Cada una de las columnas, con su valor correspondiente -->
-                <td class="text-center"><?= $fila["codigo"]; ?></td>
-                <td class="text-center"><?= $fila["fechacreacion"]; ?></td>
-                <td class="text-center">$<?= $fila["valor"]; ?></td>
-                <td class="text-center">C.C. <?= $fila["cliente"]; ?></td>
-                <td class="text-center">NIT: <?= $fila["empresa"]; ?></td>
+                <td class="text-center"><?= $fila["numero"]; ?></td>
+                <td class="text-center"><?= $fila["nombre"]; ?></td>
+                <td class="text-center"><?= $fila["numero_bajas"]; ?></td>
+                <td class="text-center"><?= $fila["fecha"]; ?></td>
+                <td class="text-center"><?= $fila["lugar_inicio"]; ?></td>
+                <td class="text-center"><?= $fila["lugar_fin"]; ?></td>
                 
                 <!-- Botón de eliminar. Debe de incluir la CP de la entidad para identificarla -->
                 <td class="text-center">
-                    <form action="proyecto_delete.php" method="post">
-                        <input hidden type="text" name="codigoEliminar" value="<?= $fila["codigo"]; ?>">
+                    <form action="enfrentamiento_delete.php" method="post">
+                        <input hidden type="text" name="numeroEliminar" value="<?= $fila["numero"]; ?>">
                         <button type="submit" class="btn btn-danger">Eliminar</button>
                     </form>
                 </td>
