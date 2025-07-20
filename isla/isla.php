@@ -11,8 +11,8 @@ include "../includes/header.php";
     <form action="isla_insert.php" method="post" class="form-group">
 
         <div class="mb-3">
-            <label for="codigo-isla" class="form-label">Código de Isla</label>
-            <input type="number" class="form-control" id="codigo-isla" name="codigo-isla" required>
+            <label for="codigo" class="form-label">Código de Isla</label>
+            <input type="number" class="form-control" id="codigo-isla" name="codigo" required>
         </div>
 
         <div class="mb-3">
@@ -25,7 +25,7 @@ include "../includes/header.php";
             <input type="text" class="form-control" id="region" name="region" required>
         </div>
         
-        <div class="mb-3">
+        <div class="mb-3"> <!-- Esto debe ser un select -->
             <label for="fruta_diablo" class="form-label">Fruta del Diablo</label>
             <input type="number" class="form-control" id="fruta_diablo" name="fruta_diablo" required>
         </div>
@@ -78,7 +78,7 @@ if($resultadoIsla and $resultadoIsla->num_rows > 0):
                 <!-- Botón de eliminar. Debe de incluir la CP de la entidad para identificarla -->
                 <td class="text-center">
                     <form action="isla_delete.php" method="post">
-                        <input hidden type="text" name="cedulaEliminar" value="<?= $fila["codigo"]; ?>">
+                        <input hidden type="text" name="codigo" value="<?= $fila["codigo"]; ?>">
                         <button type="submit" class="btn btn-danger">Eliminar</button>
                     </form>
                 </td>
