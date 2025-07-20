@@ -12,7 +12,12 @@ $lugar_inicio = $_POST["lugar_inicio"];
 $lugar_fin = $_POST["lugar_fin"];
 
 // Query SQL a la BD. Si tienen que hacer comprobaciones, hacerlas acá (Generar una query diferente para casos especiales)
-$query = "INSERT INTO `enfrentamiento`(`numero`,`nombre`, `numero_bajas`, `fecha`, `lugar_inicio`, `lugar_fin`) VALUES ('$numero', '$nombre', '$numero_bajas', '$fecha', '$lugar_inicio', '$lugar_fin')";
+if ($lugar_fin === "") {
+	$query = "INSERT INTO `enfrentamiento`(`numero`,`nombre`, `numero_bajas`, `fecha`, `lugar_inicio`) VALUES ('$numero', '$nombre', '$numero_bajas', '$fecha', '$lugar_inicio')";
+} else {
+	$query = "INSERT INTO `enfrentamiento`(`numero`,`nombre`, `numero_bajas`, `fecha`, `lugar_inicio`, `lugar_fin`) VALUES ('$numero', '$nombre', '$numero_bajas', '$fecha', '$lugar_inicio', '$lugar_fin')";
+}
+
 
 // Ejecutar consulta
 $result = mysqli_query($conn, $query) or die(mysqli_error($conn));

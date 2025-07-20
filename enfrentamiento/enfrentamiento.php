@@ -33,7 +33,7 @@ include "../includes/header.php";
         <!-- Consultar la lista de islas de inicio y desplegarlos -->
         <div class="mb-3">
             <label for="lugar_inicio" class="form-label">Lugar de inicio</label>
-            <select name="lugar_inicio" id="isla" class="form-select">
+            <select name="lugar_inicio" id="lugar_inicio" class="form-select">
                 
                 <!-- Option por defecto -->
                 <option value= "" selected disabled hidden></option>
@@ -65,10 +65,10 @@ include "../includes/header.php";
         <!-- Consultar la lista de islas de fin y desplegarlos -->
         <div class="mb-3">
             <label for="lugar_fin" class="form-label">Lugar de fin</label>
-            <select name="lugar_fin" id="isla" class="form-select">
+            <select name="lugar_fin" id="lugar_fin" class="form-select">
                 
                 <!-- Option por defecto -->
-                <option value= "" selected disabled hidden></option>
+                <option value= "" selected>NULL</option>
 
                 <?php
                 // Importar el código del otro archivo
