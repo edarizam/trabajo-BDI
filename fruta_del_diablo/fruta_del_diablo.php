@@ -3,16 +3,16 @@ include "../includes/header.php";
 ?>
 
 <!-- TÍTULO. Cambiarlo, pero dejar especificada la analogía -->
-<h1 class="mt-3">Entidad análoga a EMPRESA (NOMBRE)</h1>
+<h1 class="mt-3">Entidad análoga a  CONTRATO (FRUTA DEL DIABLO)</h1>
 
 <!-- FORMULARIO. Cambiar los campos de acuerdo a su trabajo -->
 <div class="formulario p-4 m-3 border rounded-3">
 
-    <form action="empresa_insert.php" method="post" class="form-group">
+    <form action="fruta_del_diablo_insert.php" method="post" class="form-group">
 
         <div class="mb-3">
-            <label for="nit" class="form-label">NIT</label>
-            <input type="number" class="form-control" id="nit" name="nit" required>
+            <label for="codigo" class="form-label">Código</label>
+            <input type="number" class="form-control" id="codigo" name="codigo" required>
         </div>
 
         <div class="mb-3">
@@ -21,39 +21,30 @@ include "../includes/header.php";
         </div>
 
         <div class="mb-3">
-            <label for="presupuesto" class="form-label">Presupuesto</label>
-            <input type="number" class="form-control" id="presupuesto" name="presupuesto" required>
+            <label for="tipo" class="form-label">Tipo</label>
+            <input type="text" class="form-control" id="tipo" name="tipo" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="poder_otorgado" class="form-label">Poder otorgado</label>
+            <input type="text" class="form-control" id="poder_otorgado" name="poder_otorgado" required>
         </div>
         
-        <!-- Consultar la lista de clientes y desplegarlos -->
         <div class="mb-3">
-            <label for="cliente" class="form-label">Cliente</label>
-            <select name="cliente" id="cliente" class="form-select">
-                
-                <!-- Option por defecto -->
-                <option value="" selected disabled hidden></option>
-
-                <?php
-                // Importar el código del otro archivo
-                require("../cliente/cliente_select.php");
-                
-                // Verificar si llegan datos
-                if($resultadoCliente):
-                    
-                    // Iterar sobre los registros que llegaron
-                    foreach ($resultadoCliente as $fila):
-                ?>
-
-                <!-- Opción que se genera -->
-                <option value="<?= $fila["cedula"]; ?>"><?= $fila["nombre"]; ?> - C.C. <?= $fila["cedula"]; ?></option>
-
-                <?php
-                        // Cerrar los estructuras de control
-                    endforeach;
-                endif;
-                ?>
-            </select>
+            <label for="precio" class="form-label">Precio</label>
+            <input type="number" class="form-control" id="precio" name="precio" required>
         </div>
+        
+        <div class="mb-3">
+            <label for="fecha_produccion" class="form-label">Fecha producción</label>
+            <input type="date" class="form-control" id="fecha_produccion" name="fecha_produccion" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="fecha_expiracion" class="form-label">Fecha expiración</label>
+            <input type="date" class="form-control" id="fecha_expiracion" name="fecha_expiracion" required>
+        </div>
+
 
         <button type="submit" class="btn btn-primary">Agregar</button>
 
@@ -63,10 +54,10 @@ include "../includes/header.php";
 
 <?php
 // Importar el código del otro archivo
-require("empresa_select.php");
+require("fruta_del_diablo_select.php");
 
 // Verificar si llegan datos
-if($resultadoEmpresa and $resultadoEmpresa->num_rows > 0):
+if($resultadoFruta and $resultadoFruta->num_rows > 0):
 ?>
 
 <!-- MOSTRAR LA TABLA. Cambiar las cabeceras -->
@@ -77,10 +68,13 @@ if($resultadoEmpresa and $resultadoEmpresa->num_rows > 0):
         <!-- Títulos de la tabla, cambiarlos -->
         <thead class="table-dark">
             <tr>
-                <th scope="col" class="text-center">NIT</th>
+                <th scope="col" class="text-center">Código</th>
                 <th scope="col" class="text-center">Nombre</th>
-                <th scope="col" class="text-center">Presupuesto</th>
-                <th scope="col" class="text-center">Cliente</th>
+                <th scope="col" class="text-center">Tipo</th>
+                <th scope="col" class="text-center">Poder otorgado</th>
+                <th scope="col" class="text-center">Precio</th>
+                <th scope="col" class="text-center">Fecha producción</th>
+                <th scope="col" class="text-center">Fecha expiración</th>
                 <th scope="col" class="text-center">Acciones</th>
             </tr>
         </thead>
@@ -89,21 +83,24 @@ if($resultadoEmpresa and $resultadoEmpresa->num_rows > 0):
 
             <?php
             // Iterar sobre los registros que llegaron
-            foreach ($resultadoEmpresa as $fila):
+            foreach ($resultadoFruta as $fila):
             ?>
 
             <!-- Fila que se generará -->
             <tr>
                 <!-- Cada una de las columnas, con su valor correspondiente -->
-                <td class="text-center"><?= $fila["nit"]; ?></td>
+                <td class="text-center"><?= $fila["codigo"]; ?></td>
                 <td class="text-center"><?= $fila["nombre"]; ?></td>
-                <td class="text-center">$<?= $fila["presupuesto"]; ?></td>
-                <td class="text-center">C.C. <?= $fila["cliente"]; ?></td>
+                <td class="text-center"><?= $fila["tipo"]; ?></td>
+                <td class="text-center"><?= $fila["poder_otorgado"]; ?></td>
+                <td class="text-center">$<?= $fila["precio"]; ?></td>
+                <td class="text-center"><?= $fila["fecha_produccion"]; ?></td>
+                <td class="text-center"><?= $fila["fecha_expiracion"]; ?></td>
                 
                 <!-- Botón de eliminar. Debe de incluir la CP de la entidad para identificarla -->
                 <td class="text-center">
-                    <form action="empresa_delete.php" method="post">
-                        <input hidden type="text" name="nitEliminar" value="<?= $fila["nit"]; ?>">
+                    <form action="fruta_del_diablo_delete.php" method="post">
+                        <input hidden type="text" name="codigoEliminar" value="<?= $fila["codigo"]; ?>">
                         <button type="submit" class="btn btn-danger">Eliminar</button>
                     </form>
                 </td>
