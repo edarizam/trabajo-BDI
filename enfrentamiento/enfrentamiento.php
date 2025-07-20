@@ -30,20 +30,10 @@ include "../includes/header.php";
             <input type="date" class="form-control" id="fecha_e" name="fecha" required>
         </div>
 
+        <!-- Consultar la lista de islas de inicio y desplegarlos -->
         <div class="mb-3">
             <label for="lugar_inicio" class="form-label">Lugar de inicio</label>
-            <input type="number" class="form-control" id="lugar_inicio_e" name="lugar_inicio" required>
-        </div>
-
-        <div class="mb-3">
-            <label for="lugar_fin" class="form-label">Lugar de fin</label>
-            <input type="number" class="form-control" id="lugar_fin_e" name="lugar_fin" required>
-        </div>
-        
-        <!-- Consultar la lista de islas y desplegarlos -->
-        <div class="mb-3">
-            <label for="isla" class="form-label">Isla</label>
-            <select name="isla" id="isla" class="form-select">
+            <select name="lugar_inicio" id="isla" class="form-select">
                 
                 <!-- Option por defecto -->
                 <option value= "" selected disabled hidden></option>
@@ -61,7 +51,7 @@ include "../includes/header.php";
 
                 <!-- Opción que se genera -->
                 <option value="<?= $fila["codigo"]; ?>">
-                    <?= $fila["codigo"]; ?> - <?= $fila["nombre"]; ?> - <?= $fila["region"];?> - <?= $fila["fruta_diablo"]; ?>
+                    <?= $fila["codigo"]; ?> - <?= $fila["nombre"]; ?> - <?= $fila["region"];?> - <?= $fila["fruta_diablo"] ?? "NULL"; ?>
                 </option>
 
                 <?php
@@ -72,6 +62,37 @@ include "../includes/header.php";
             </select>
         </div>
 
+        <!-- Consultar la lista de islas de fin y desplegarlos -->
+        <div class="mb-3">
+            <label for="lugar_fin" class="form-label">Lugar de fin</label>
+            <select name="lugar_fin" id="isla" class="form-select">
+                
+                <!-- Option por defecto -->
+                <option value= "" selected disabled hidden></option>
+
+                <?php
+                // Importar el código del otro archivo
+                require("../isla/isla_select.php");
+                
+                // Verificar si llegan datos
+                if($resultadoIsla):
+                    
+                    // Iterar sobre los registros que llegaron
+                    foreach ($resultadoIsla as $fila):
+                ?>
+
+                <!-- Opción que se genera -->
+                <option value="<?= $fila["codigo"]; ?>">
+                    <?= $fila["codigo"]; ?> - <?= $fila["nombre"]; ?> - <?= $fila["region"];?> - <?= $fila["fruta_diablo"] ?? "NULL"; ?>
+                </option>
+
+                <?php
+                        // Cerrar los estructuras de control
+                    endforeach;
+                endif;
+                ?>
+            </select>
+        </div>
 
         <button type="submit" class="btn btn-primary">Agregar</button>
 
