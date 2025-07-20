@@ -11,18 +11,23 @@ include "../includes/header.php";
     <form action="isla_insert.php" method="post" class="form-group">
 
         <div class="mb-3">
-            <label for="cedula" class="form-label">Cédula</label>
-            <input type="number" class="form-control" id="cedula" name="cedula" required>
+            <label for="codigo-isla" class="form-label">Código de Isla</label>
+            <input type="number" class="form-control" id="codigo-isla" name="codigo-isla" required>
         </div>
 
         <div class="mb-3">
-            <label for="nombre" class="form-label">Nombre</label>
+            <label for="nombre" class="form-label">Nombre de la Isla</label>
             <input type="text" class="form-control" id="nombre" name="nombre" required>
         </div>
 
         <div class="mb-3">
-            <label for="celular" class="form-label">Celular</label>
-            <input type="number" class="form-control" id="celular" name="celular" required>
+            <label for="region" class="form-label">Región</label>
+            <input type="text" class="form-control" id="region" name="region" required>
+        </div>
+        
+        <div class="mb-3">
+            <label for="fruta_diablo" class="form-label">Fruta del Diablo</label>
+            <input type="number" class="form-control" id="fruta_diablo" name="fruta_diablo" required>
         </div>
 
         <button type="submit" class="btn btn-primary">Agregar</button>
@@ -47,9 +52,10 @@ if($resultadoIsla and $resultadoIsla->num_rows > 0):
         <!-- Títulos de la tabla, cambiarlos -->
         <thead class="table-dark">
             <tr>
-                <th scope="col" class="text-center">Cédula</th>
+                <th scope="col" class="text-center">Código</th>
                 <th scope="col" class="text-center">Nombre</th>
-                <th scope="col" class="text-center">Celular</th>
+                <th scope="col" class="text-center">Región</th>
+                <th scope="col" class="text-center">Fruta del Diablo</th>
                 <th scope="col" class="text-center">Acciones</th>
             </tr>
         </thead>
@@ -64,14 +70,15 @@ if($resultadoIsla and $resultadoIsla->num_rows > 0):
             <!-- Fila que se generará -->
             <tr>
                 <!-- Cada una de las columnas, con su valor correspondiente -->
-                <td class="text-center"><?= $fila["cedula"]; ?></td>
+                <td class="text-center"><?= $fila["codigo"]; ?></td>
                 <td class="text-center"><?= $fila["nombre"]; ?></td>
-                <td class="text-center"><?= $fila["celular"]; ?></td>
+                <td class="text-center"><?= $fila["region"]; ?></td>
+                <td class="text-center"><?= $fila["fruta_diablo"]; ?></td>
                 
                 <!-- Botón de eliminar. Debe de incluir la CP de la entidad para identificarla -->
                 <td class="text-center">
                     <form action="isla_delete.php" method="post">
-                        <input hidden type="text" name="cedulaEliminar" value="<?= $fila["cedula"]; ?>">
+                        <input hidden type="text" name="cedulaEliminar" value="<?= $fila["codigo"]; ?>">
                         <button type="submit" class="btn btn-danger">Eliminar</button>
                     </form>
                 </td>

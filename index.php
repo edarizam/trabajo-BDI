@@ -45,7 +45,7 @@
         <ul>
             <li><a href="isla/isla.php">Entidad análoga a MECANICO (ISLA)</a></li>
             <li><a href="fruta_del_diablo/fruta_del_diablo.php">Entidad análoga a CONTRATO (FRUTA DEL DIABLO)</a></li>
-            <li><a href="enfrentamiento/enfrentamiento.php">Entidad análoga a REPARACION (ENFRENTAMIENTO)</a></li>
+            <li><a href="enfrentamiento/enfrentamiento.php">Entidad análoga a REPARACIÓN (ENFRENTAMIENTO)</a></li>
             <li><a href="consultas/consulta1.php">Consulta 1</a></li>
             <li><a href="consultas/consulta2.php">Consulta 2</a></li>
             <li><a href="busqueda/busqueda1.php">Búsqueda 1</a></li>
