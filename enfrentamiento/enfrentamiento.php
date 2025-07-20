@@ -101,6 +101,7 @@ if($resultadoEnfrentamiento and $resultadoEnfrentamiento->num_rows > 0):
                 <th scope="col" class="text-center">Fecha</th>
                 <th scope="col" class="text-center">Lugar de inicio</th>
                 <th scope="col" class="text-center">Lugar de fin</th>
+                <th scope="col" class="text-center">Acciones</th>
             </tr>
         </thead>
 
