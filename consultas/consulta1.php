@@ -6,13 +6,13 @@ include "../includes/header.php";
 <h1 class="mt-3">Consulta 1</h1>
 
 <p class="mt-3">
-    El primer botón debe mostrar los datos de las tres reparaciones de mayor valor que no tienen mecánico ejecutor (en caso de empates, usted decide como proceder).
-    Se debe mostrar para cada una de estas tres reparaciones los datos correspondientes del mecánico receptor.
+    "El primer botón debe mostrar los datos de las tres reparaciones de mayor valor que no tienen mecánico ejecutor (en caso de empates, usted decide como proceder).
+    Se debe mostrar para cada una de estas tres reparaciones los datos correspondientes del mecánico receptor."
 </p>
 
 <p class="mt-3">
-    <b>Analogo de nuestro E-R:</b> Se muestran los datos de los tres enfrentamientos con mayor número de bajas que no han finalizado, es decir, que no tiene lugar de fin.
-    En caso de empates, se mostraran las de fecha más reciente. 
+    <b>Analogo de nuestro E-R:</b> Se muestran los datos de los tres enfrentamientos con mayor número de bajas que no han finalizado y la información de la isla donde se empezó.
+    En caso de empates, se mostraran las de fechas más recientes. 
 </p>
 
 <?php
