@@ -26,6 +26,7 @@ $query = "SELECT
             e.numero_bajas,
             e.fecha,
             e.lugar_inicio,
+            e.lugar_fin,
             i.codigo AS codigo_isla,
             i.nombre AS nombre_isla,
             i.region AS region_isla,
@@ -60,6 +61,7 @@ if($resultadoC1 and $resultadoC1->num_rows > 0):
                 <th scope="col" class="text-center">Número de bajas</th>
                 <th scope="col" class="text-center">Fecha</th>
                 <th scope="col" class="text-center">Lugar de inicio</th>
+                <th scope="col" class="text-center">Lugar de fin</th>
                 <th scope="col" class="text-center">Código de isla</th>                
                 <th scope="col" class="text-center">Nombre de la isla</th>
                 <th scope="col" class="text-center">Región</th>
@@ -82,6 +84,7 @@ if($resultadoC1 and $resultadoC1->num_rows > 0):
                 <td class="text-center"><?= $fila["numero_bajas"]; ?></td>
                 <td class="text-center"><?= $fila["fecha"]; ?></td>
                 <td class="text-center"><?= $fila["lugar_inicio"]; ?></td>
+                <td class="text-center"><?= $fila["lugar_fin"]; ?></td>
                 <td class="text-center"><?= $fila["codigo_isla"]; ?></td>
                 <td class="text-center"><?= $fila["nombre_isla"]; ?></td>
                 <td class="text-center"><?= $fila["region_isla"]; ?></td>
