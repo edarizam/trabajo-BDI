@@ -1,25 +1,32 @@
-CREATE TABLE isla(
-  codigo NUMERIC(10,0) PRIMARY KEY,
-  nombre VARCHAR(50) NOT NULL UNIQUE,
-  region VARCHAR(20) NOT NULL,
-  fruta_diablo NUMERIC(10,0) UNIQUE REFERENCES fruta_del_diablo
-);
-
-CREATE TABLE enfrentamiento(
-  numero NUMERIC(10,0) PRIMARY KEY, 
-  nombre VARCHAR(100) NOT NULL UNIQUE,
-  fecha DATE NOT NULL,
-  numero_bajas NUMERIC(10,0) NOT NULL,
-  lugar_inicio NUMERIC(10,0) NOT NULL REFERENCES isla,
-  lugar_fin NUMERIC(10,0) REFERENCES isla
-);
-
-CREATE TABLE fruta_del_diablo(
-  codigo NUMERIC(10,0) PRIMARY KEY,
+CREATE TABLE fruta_del_diablo (
+  codigo INT PRIMARY KEY,
   nombre VARCHAR(50) NOT NULL UNIQUE,
   tipo VARCHAR(20) NOT NULL,
   poder_otorgado VARCHAR(100) NOT NULL UNIQUE,
-  precio NUMERIC(10,0) NOT NULL,
+  precio INT NOT NULL CHECK (precio > 0),
   fecha_produccion DATE NOT NULL,
   fecha_expiracion DATE NOT NULL,
+  CHECK (fecha_produccion < fecha_expiracion)
 );
+
+CREATE TABLE isla (
+  codigo INT PRIMARY KEY,
+  nombre VARCHAR(50) NOT NULL UNIQUE,
+  region VARCHAR(20) NOT NULL,
+  fruta_diablo INT UNIQUE,
+  FOREIGN KEY (fruta_diablo) REFERENCES fruta_del_diablo(codigo)
+);
+
+CREATE TABLE enfrentamiento (
+  numero INT PRIMARY KEY, 
+  nombre VARCHAR(100) NOT NULL UNIQUE,
+  fecha DATE NOT NULL,
+  numero_bajas INT NOT NULL,
+  lugar_inicio INT NOT NULL,
+  lugar_fin INT,
+  CHECK (lugar_fin IS NULL OR lugar_fin <> lugar_inicio),
+  FOREIGN KEY (lugar_inicio) REFERENCES isla(codigo),
+  FOREIGN KEY (lugar_fin) REFERENCES isla(codigo)
+);
+
+
