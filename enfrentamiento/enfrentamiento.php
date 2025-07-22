@@ -11,27 +11,32 @@ include "../includes/header.php";
     <form action="enfrentamiento_insert.php" method="post" class="form-group">
 
         <div class="mb-3">
-            <label for="codigo" class="form-label">Código</label>
-            <input type="number" class="form-control" id="codigo" name="codigo" required>
+            <label for="numero" class="form-label">Número</label>
+            <input type="number" class="form-control" id="numero_e" name="numero" required>
         </div>
 
         <div class="mb-3">
-            <label for="fechacreacion" class="form-label">Fecha de creación</label>
-            <input type="date" class="form-control" id="fechacreacion" name="fechacreacion" required>
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="nombre_e" name="nombre" required>
         </div>
 
         <div class="mb-3">
-            <label for="valor" class="form-label">Valor</label>
-            <input type="number" class="form-control" id="valor" name="valor" required>
+            <label for="numero_bajas" class="form-label">Número de bajas</label>
+            <input type="number" class="form-control" id="numero_bajas_e" name="numero_bajas" required>
         </div>
-        
-        <!-- Consultar la lista de clientes y desplegarlos -->
+
         <div class="mb-3">
-            <label for="cliente" class="form-label">Cliente</label>
-            <select name="cliente" id="cliente" class="form-select">
+            <label for="fecha" class="form-label">Fecha</label>
+            <input type="date" class="form-control" id="fecha_e" name="fecha" required>
+        </div>
+
+        <!-- Consultar la lista de islas de inicio y desplegarlos -->
+        <div class="mb-3">
+            <label for="lugar_inicio" class="form-label">Lugar de inicio</label>
+            <select name="lugar_inicio" id="lugar_inicio" class="form-select">
                 
                 <!-- Option por defecto -->
-                <option value="" selected disabled hidden></option>
+                <option value= "" selected disabled hidden></option>
 
                 <?php
                 // Importar el código del otro archivo
@@ -45,7 +50,9 @@ include "../includes/header.php";
                 ?>
 
                 <!-- Opción que se genera -->
-                <option value="<?= $fila["cedula"]; ?>"><?= $fila["nombre"]; ?> - C.C. <?= $fila["cedula"]; ?></option>
+                <option value="<?= $fila["codigo"]; ?>">
+                    <?= $fila["codigo"]; ?> - <?= $fila["nombre"]; ?> - <?= $fila["region"];?> - <?= $fila["fruta_diablo"] ?? "NULL"; ?>
+                </option>
 
                 <?php
                         // Cerrar los estructuras de control
@@ -55,27 +62,29 @@ include "../includes/header.php";
             </select>
         </div>
 
-        <!-- Consultar la lista de empresas y desplegarlos -->
+        <!-- Consultar la lista de islas de fin y desplegarlos -->
         <div class="mb-3">
-            <label for="empresa" class="form-label">Empresa</label>
-            <select name="empresa" id="empresa" class="form-select">
+            <label for="lugar_fin" class="form-label">Lugar de fin</label>
+            <select name="lugar_fin" id="lugar_fin" class="form-select">
                 
                 <!-- Option por defecto -->
-                <option value="" selected disabled hidden></option>
+                <option value= "" selected>NULL</option>
 
                 <?php
                 // Importar el código del otro archivo
-                require("../empresa/empresa_select.php");
+                require("../isla/isla_select.php");
                 
                 // Verificar si llegan datos
-                if($resultadoEmpresa):
+                if($resultadoIsla):
                     
                     // Iterar sobre los registros que llegaron
-                    foreach ($resultadoEmpresa as $fila):
+                    foreach ($resultadoIsla as $fila):
                 ?>
 
                 <!-- Opción que se genera -->
-                <option value="<?= $fila["nit"]; ?>"><?= $fila["nombre"]; ?> - NIT: <?= $fila["nit"]; ?></option>
+                <option value="<?= $fila["codigo"]; ?>">
+                    <?= $fila["codigo"]; ?> - <?= $fila["nombre"]; ?> - <?= $fila["region"];?> - <?= $fila["fruta_diablo"] ?? "NULL"; ?>
+                </option>
 
                 <?php
                         // Cerrar los estructuras de control
@@ -107,11 +116,12 @@ if($resultadoEnfrentamiento and $resultadoEnfrentamiento->num_rows > 0):
         <!-- Títulos de la tabla, cambiarlos -->
         <thead class="table-dark">
             <tr>
-                <th scope="col" class="text-center">Código</th>
-                <th scope="col" class="text-center">Fecha de creación</th>
-                <th scope="col" class="text-center">Valor</th>
-                <th scope="col" class="text-center">Cliente</th>
-                <th scope="col" class="text-center">Empresa</th>
+                <th scope="col" class="text-center">Número</th>
+                <th scope="col" class="text-center">Nombre</th>
+                <th scope="col" class="text-center">Número de bajas</th>
+                <th scope="col" class="text-center">Fecha</th>
+                <th scope="col" class="text-center">Lugar de inicio</th>
+                <th scope="col" class="text-center">Lugar de fin</th>
                 <th scope="col" class="text-center">Acciones</th>
             </tr>
         </thead>
@@ -120,22 +130,23 @@ if($resultadoEnfrentamiento and $resultadoEnfrentamiento->num_rows > 0):
 
             <?php
             // Iterar sobre los registros que llegaron
-            foreach ($resultadoProyecto as $fila):
+            foreach ($resultadoEnfrentamiento as $fila):
             ?>
 
             <!-- Fila que se generará -->
             <tr>
                 <!-- Cada una de las columnas, con su valor correspondiente -->
-                <td class="text-center"><?= $fila["codigo"]; ?></td>
-                <td class="text-center"><?= $fila["fechacreacion"]; ?></td>
-                <td class="text-center">$<?= $fila["valor"]; ?></td>
-                <td class="text-center">C.C. <?= $fila["cliente"]; ?></td>
-                <td class="text-center">NIT: <?= $fila["empresa"]; ?></td>
+                <td class="text-center"><?= $fila["numero"]; ?></td>
+                <td class="text-center"><?= $fila["nombre"]; ?></td>
+                <td class="text-center"><?= $fila["numero_bajas"]; ?></td>
+                <td class="text-center"><?= $fila["fecha"]; ?></td>
+                <td class="text-center"><?= $fila["lugar_inicio"]; ?></td>
+                <td class="text-center"><?= $fila["lugar_fin"]; ?></td>
                 
                 <!-- Botón de eliminar. Debe de incluir la CP de la entidad para identificarla -->
                 <td class="text-center">
-                    <form action="proyecto_delete.php" method="post">
-                        <input hidden type="text" name="codigoEliminar" value="<?= $fila["codigo"]; ?>">
+                    <form action="enfrentamiento_delete.php" method="post">
+                        <input hidden type="text" name="numeroEliminar" value="<?= $fila["numero"]; ?>">
                         <button type="submit" class="btn btn-danger">Eliminar</button>
                     </form>
                 </td>

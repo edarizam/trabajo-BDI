@@ -3,7 +3,7 @@ include "../includes/header.php";
 ?>
 
 <!-- TÍTULO. Cambiarlo, pero dejar especificada la analogía -->
-<h1 class="mt-3">Entidad análoga a CLIENTE (ISLA)</h1>
+<h1 class="mt-3">Entidad análoga a MECÁNICO (ISLA)</h1>
 
 <!-- FORMULARIO. Cambiar los campos de acuerdo a su trabajo -->
 <div class="formulario p-4 m-3 border rounded-3">
@@ -25,9 +25,36 @@ include "../includes/header.php";
             <input type="text" class="form-control" id="region" name="region" required>
         </div>
         
-        <div class="mb-3"> <!-- Esto debe ser un select -->
+         <!-- Consultar la lista de clientes y desplegarlos -->
+        <div class="mb-3">
             <label for="fruta_diablo" class="form-label">Fruta del Diablo</label>
-            <input type="number" class="form-control" id="fruta_diablo" name="fruta_diablo" required>
+            <select name="fruta_diablo" id="fruta_diablo" class="form-select">
+                
+                <!-- Option por defecto -->
+                <option value="" selected>NULL</option>
+
+                <?php
+                // Importar el código del otro archivo
+                require("../fruta_del_diablo/fruta_del_diablo_select.php");
+                
+                // Verificar si llegan datos
+                if($resultadoFruta):
+                    
+                    // Iterar sobre los registros que llegaron
+                    foreach ($resultadoFruta as $fila):
+                ?>
+
+                <!-- Opción que se genera -->
+                <option value="<?= $fila["codigo"]; ?>">
+                    <?= $fila["codigo"]; ?> - <?= $fila["nombre"]; ?> - <?= $fila["tipo"]; ?> - <?= $fila["poder_otorgado"]; ?> - <?= $fila["precio"]; ?> - <?= $fila["fecha_produccion"]; ?> - <?= $fila["fecha_expiracion"]; ?>
+                </option>
+
+                <?php
+                        // Cerrar los estructuras de control
+                    endforeach;
+                endif;
+                ?>
+            </select>
         </div>
 
         <button type="submit" class="btn btn-primary">Agregar</button>
