@@ -8,11 +8,12 @@ $codigo = $_POST["codigo"];
 $nombre = $_POST["nombre"];
 $tipo = $_POST["tipo"];
 $poder_otorgado = $_POST["poder_otorgado"];
+$precio = $_POST["precio"];
 $fecha_produccion = $_POST["fecha_produccion"];
 $fecha_expiracion = $_POST["fecha_expiracion"];
 
 // Query SQL a la BD. Si tienen que hacer comprobaciones, hacerlas acá (Generar una query diferente para casos especiales)
-$query = "INSERT INTO `fruta_del_diablo`(`codigo`,`nombre`, `tipo`, `poder_otorgado`, `fecha_produccion`, `fecha_expiracion`) VALUES ('$codigo', '$nombre', '$tipo', '$poder_otorgado', '$fecha_produccion', '$fecha_expiracion' )";
+$query = "INSERT INTO `fruta_del_diablo`(`codigo`,`nombre`, `tipo`, `poder_otorgado`,`precio`, `fecha_produccion`, `fecha_expiracion`) VALUES ('$codigo', '$nombre', '$tipo', '$poder_otorgado', $precio,'$fecha_produccion', '$fecha_expiracion' )";
 
 // Ejecutar consulta
 $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
