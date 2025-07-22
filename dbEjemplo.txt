@@ -21,7 +21,7 @@ CREATE TABLE enfrentamiento (
   numero INT PRIMARY KEY, 
   nombre VARCHAR(100) NOT NULL UNIQUE,
   fecha DATE NOT NULL,
-  numero_bajas INT NOT NULL,
+  numero_bajas INT NOT NULL CHECK (numero_bajas >= 0),
   lugar_inicio INT NOT NULL,
   lugar_fin INT,
   CHECK (lugar_fin IS NULL OR lugar_fin <> lugar_inicio),

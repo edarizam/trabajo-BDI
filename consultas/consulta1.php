@@ -6,11 +6,13 @@ include "../includes/header.php";
 <h1 class="mt-3">Consulta 1</h1>
 
 <p class="mt-3">
-    Sea sumavalor la suma de los valores de todos los proyectos asociados con un cliente.
-    El primer botón debe mostrar la cédula y el nombre de cada uno de los clientes 
-    que cumple todas las siguientes condiciones: es gerente, tiene sumavalor > 1000,
-    ha revisado al menos 3 proyectos y la empresa que gerencia no ha revisado ni un
-    solo proyecto.
+    El primer botón debe mostrar los datos de las tres reparaciones de mayor valor que no tienen mecánico ejecutor (en caso de empates, usted decide como proceder).
+    Se debe mostrar para cada una de estas tres reparaciones los datos correspondientes del mecánico receptor.
+</p>
+
+<p class="mt-3">
+    <b>Analogo de nuestro E-R:</b> Se muestran los datos de los tres enfrentamientos con mayor número de bajas que no han finalizado, es decir, que no tiene lugar de fin.
+    En caso de empates, se mostraran las de fecha más reciente. 
 </p>
 
 <?php
@@ -18,7 +20,7 @@ include "../includes/header.php";
 require('../config/conexion.php');
 
 // Query SQL a la BD -> Crearla acá (No está completada, cambiarla a su contexto y a su analogía)
-$query = "SELECT cedula, nombre FROM cliente";
+$query = "SELECT * FROM enfrentamiento WHERE lugar_fin IS NULL ORDER BY numero_bajas DESC, fecha DESC LIMIT 3";
 
 // Ejecutar la consulta
 $resultadoC1 = mysqli_query($conn, $query) or die(mysqli_error($conn));
@@ -39,8 +41,12 @@ if($resultadoC1 and $resultadoC1->num_rows > 0):
         <!-- Títulos de la tabla, cambiarlos -->
         <thead class="table-dark">
             <tr>
-                <th scope="col" class="text-center">Cédula</th>
+                <th scope="col" class="text-center">Número</th>
                 <th scope="col" class="text-center">Nombre</th>
+                <th scope="col" class="text-center">Número de bajas</th>
+                <th scope="col" class="text-center">Fecha</th>
+                <th scope="col" class="text-center">Lugar de inicio</th>
+                <th scope="col" class="text-center">Lugar de fin</th>
             </tr>
         </thead>
 
@@ -54,8 +60,12 @@ if($resultadoC1 and $resultadoC1->num_rows > 0):
             <!-- Fila que se generará -->
             <tr>
                 <!-- Cada una de las columnas, con su valor correspondiente -->
-                <td class="text-center"><?= $fila["cedula"]; ?></td>
+                <td class="text-center"><?= $fila["numero"]; ?></td>
                 <td class="text-center"><?= $fila["nombre"]; ?></td>
+                <td class="text-center"><?= $fila["numero_bajas"]; ?></td>
+                <td class="text-center"><?= $fila["fecha"]; ?></td>
+                <td class="text-center"><?= $fila["lugar_inicio"]; ?></td>
+                <td class="text-center"><?= $fila["lugar_fin"]; ?></td>
             </tr>
 
             <?php
