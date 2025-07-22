@@ -21,7 +21,7 @@ include "../includes/header.php";
     <form action="busqueda2.php" method="post" class="form-group">
 
         <div class="mb-3">
-            <label for="numero_enfrentamiento" class="form-label">numero_enfrentamiento</label>
+            <label for="numero_enfrentamiento" class="form-label">Numero enfrentamiento</label>
             <input type="number" class="form-control" id="numero_enfrentamiento" name="numero_enfrentamiento" required>
         </div>
 
@@ -43,7 +43,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'):
 
 
     // Query SQL a la BD -> Crearla acá (No está completada, cambiarla a su contexto y a su analogía)
-    $query = "SELECT  nombre FROM enfrentamiento WHERE numero = '$numero_enfrentamiento'";
+    $query = "SELECT  * FROM fruta_del_diablo WHERE codigo = (SELECT fruta_diablo FROM isla WHERE codigo = (SELECT lugar_inicio FROM enfrentamiento WHERE numero = '$numero_enfrentamiento'))";
+
+    //SELECT * FROM `fruta_del_diablo` WHERE codigo= (
+    //SELECT fruta_diablo FROM isla WHERE codigo = (
+        //SELECT lugar_inicio FROM enfrentamiento where numero = 143));
+        //'$numero_enfrentamiento'
 
     // Ejecutar la consulta
     $resultadoB2 = mysqli_query($conn, $query) or die(mysqli_error($conn));
@@ -62,7 +67,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'):
         <!-- Títulos de la tabla, cambiarlos -->
         <thead class="table-dark">
             <tr>
-                <th scope="col" class="text-center">Nombre enfrentamiento</th>
+                <th scope="col" class="text-center">Codigo</th>
+                <th scope="col" class="text-center">Nombre</th>
+                <th scope="col" class="text-center">Tipo</th>
+                <th scope="col" class="text-center">Poder otorgado</th>
+                <th scope="col" class="text-center">Precio</th>
+                <th scope="col" class="text-center">Fecha producción</th>
+                <th scope="col" class="text-center">Fecha expiración</th>
                 
             </tr>
         </thead>
@@ -77,7 +88,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'):
             <!-- Fila que se generará -->
             <tr>
                 <!-- Cada una de las columnas, con su valor correspondiente -->
+                <td class="text-center"><?= $fila["codigo"]; ?></td>
                 <td class="text-center"><?= $fila["nombre"]; ?></td>
+                <td class="text-center"><?= $fila["tipo"]; ?></td>
+                <td class="text-center"><?= $fila["poder_otorgado"]; ?></td>
+                <td class="text-center"><?= $fila["precio"]; ?></td>
+                <td class="text-center"><?= $fila["fecha_produccion"]; ?></td>
+                <td class="text-center"><?= $fila["fecha_expiracion"]; ?></td>
 
             </tr>
 
