@@ -34,7 +34,7 @@ $query = "SELECT
             FROM enfrentamiento e
             JOIN isla i ON e.lugar_inicio = i.codigo
             WHERE e.lugar_fin IS NULL
-            ORDER BY e.numero_bajas DESC, e.fecha DESC
+            ORDER BY e.numero_bajas DESC, e.fecha DESC, e.nombre ASC
             LIMIT 3";
 
 // Ejecutar la consulta
