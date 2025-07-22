@@ -20,7 +20,21 @@ include "../includes/header.php";
 require('../config/conexion.php');
 
 // Query SQL a la BD -> Crearla acá (No está completada, cambiarla a su contexto y a su analogía)
-$query = "SELECT * FROM enfrentamiento WHERE lugar_fin IS NULL ORDER BY numero_bajas DESC, fecha DESC LIMIT 3";
+$query = "SELECT 
+            e.numero,
+            e.nombre,
+            e.numero_bajas,
+            e.fecha,
+            e.lugar_inicio,
+            i.codigo AS codigo_isla,
+            i.nombre AS nombre_isla,
+            i.region AS region_isla,
+            i.fruta_diablo AS fruta_codigo
+            FROM enfrentamiento e
+            JOIN isla i ON e.lugar_inicio = i.codigo
+            WHERE e.lugar_fin IS NULL
+            ORDER BY e.numero_bajas DESC, e.fecha DESC
+            LIMIT 3";
 
 // Ejecutar la consulta
 $resultadoC1 = mysqli_query($conn, $query) or die(mysqli_error($conn));
@@ -46,7 +60,10 @@ if($resultadoC1 and $resultadoC1->num_rows > 0):
                 <th scope="col" class="text-center">Número de bajas</th>
                 <th scope="col" class="text-center">Fecha</th>
                 <th scope="col" class="text-center">Lugar de inicio</th>
-                <th scope="col" class="text-center">Lugar de fin</th>
+                <th scope="col" class="text-center">Código de isla</th>                
+                <th scope="col" class="text-center">Nombre de la isla</th>
+                <th scope="col" class="text-center">Región</th>
+                <th scope="col" class="text-center">Fruta del diablo</th>              
             </tr>
         </thead>
 
@@ -65,7 +82,10 @@ if($resultadoC1 and $resultadoC1->num_rows > 0):
                 <td class="text-center"><?= $fila["numero_bajas"]; ?></td>
                 <td class="text-center"><?= $fila["fecha"]; ?></td>
                 <td class="text-center"><?= $fila["lugar_inicio"]; ?></td>
-                <td class="text-center"><?= $fila["lugar_fin"]; ?></td>
+                <td class="text-center"><?= $fila["codigo_isla"]; ?></td>
+                <td class="text-center"><?= $fila["nombre_isla"]; ?></td>
+                <td class="text-center"><?= $fila["region_isla"]; ?></td>
+                <td class="text-center"><?= $fila["fruta_codigo"]; ?></td>
             </tr>
 
             <?php
