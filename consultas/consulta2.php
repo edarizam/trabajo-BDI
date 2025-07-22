@@ -22,7 +22,7 @@ include "../includes/header.php";
 require('../config/conexion.php');
 
 // Query SQL a la BD -> Crearla acá (No está completada, cambiarla a su contexto y a su analogía)
-$query = "SELECT isla.*, count(*) AS cantidad_enfrentamientos 
+$query = "SELECT isla.*
 FROM isla 
 JOIN enfrentamiento on isla.codigo = enfrentamiento.lugar_inicio
 WHERE isla.fruta_diablo IS NOT NULL 
@@ -57,7 +57,6 @@ if($resultadoC2 and $resultadoC2->num_rows > 0):
                 <th scope="col" class="text-center">Nombre</th>
                 <th scope="col" class="text-center">Región</th>
                 <th scope="col" class="text-center">Fruta Del Diablo</th>
-                <th scope="col" class="text-center">Cantidad Enfrantamientos</th>
             </tr>
         </thead>
 
@@ -75,7 +74,6 @@ if($resultadoC2 and $resultadoC2->num_rows > 0):
                 <td class="text-center"><?= $fila["nombre"]; ?></td>
                 <td class="text-center"><?= $fila["region"]; ?></td>
                 <td class="text-center"><?= $fila["fruta_diablo"]; ?></td>
-                <td class="text-center"><?= $fila["cantidad_enfrentamientos"]; ?></td>
             </tr>
 
             <?php
